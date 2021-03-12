@@ -1,10 +1,11 @@
 
 import sys
 from vue.member_vue import MemberVue
+from vue.article_vue import ArticleVue
 from exceptions import ResourceNotFound, Error, InvalidData
 
 
-class AdminVue(MemberVue):
+class AdminVue(MemberVue, ArticleVue):
     """
     Admin Vue
     Admin specific interfaces
@@ -37,6 +38,13 @@ class AdminVue(MemberVue):
             "search": "Show member profile",
             "delete": "Delete a member",
             "update": "Update a member",
+            "--------------------------"
+
+            "addArticle": "Add store article",
+            "listArticle": "List association articles",
+            "searchArticle": "Show article informations",
+            "deleteArticle": "Delete an article",
+            "updateArticle": "Update a article",
             "help": "Show this help"
         }
 
@@ -64,10 +72,24 @@ class AdminVue(MemberVue):
                     self.show_member(member)
                 elif command == 'help':
                     self.help(commands)
+                elif command == 'add':
+                    article_type = 'unknown'
+                    article = self.add_member(article_type)
+                    self.show_article(article)
+                elif command == 'listArticle':
+                    self.show_articles()
+                elif command == 'search':
+                    article = self.search_article()
+                    self.show_member(article)
+                elif command == 'delete':
+                    self.delete_article()
+                elif command == 'update':
+                    article = self.update_article()
+                    self.show_article(article)
                 else:
                     print("Unknown command")
             except ResourceNotFound:
-                self.error_message("Member not found")
+                self.error_message("Member/Article not found")
             except InvalidData as e:
                 self.error_message(str(e))
             except Error as e:

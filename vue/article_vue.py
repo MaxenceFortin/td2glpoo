@@ -22,7 +22,7 @@ class ArticleVue:
         data['price'] = self._common.ask_price()
         return self._article_controller.create_article(data)
 
-    def show_member(self, article: dict):
+    def show_article(self, article: dict):
         print("Article information: ")
         print(article['name'].capitalize())
         print("description:", article['description'])
