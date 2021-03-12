@@ -13,19 +13,19 @@ class ArticleController:
         self._database_engine = database_engine
         self._frames = []
 
-    def list_members(self):
+    def list_articles(self):
         with self._database_engine.new_session() as session:
             articles = ArticleDAO(session).get_all()
             articles_data = [member.to_dict() for member in articles]
         return articles_data
 
-    def get_member(self, article_id):
+    def get_article(self, article_id):
         with self._database_engine.new_session() as session:
             article = ArticleDAO(session).get(article_id)
             article_data = article.to_dict()
         return article_data
 
-    def create_member(self, data):
+    def create_article(self, data):
 
         self._check_profile_data(data)
         try:
@@ -54,12 +54,12 @@ class ArticleController:
             article = article_dao.get(article_id)
             article_dao.delete(article)
 
-    def search_article(self, firstname, lastname):
+    def search_article(self, name):
 
         # Query database
         with self._database_engine.new_session() as session:
             article_dao = ArticleDAO(session)
-            article = article_dao.get_by_name(firstname, lastname)
+            article = article_dao.get_by_name(name)
             return article.to_dict()
 
     def _check_profile_data(self, data, update=False):
@@ -67,9 +67,9 @@ class ArticleController:
         type_pattern = re.compile("^(customer|seller)$")
         email_pattern = re.compile("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
         mandatories = {
-            'firstname': {"type": str, "regex": name_pattern},
-            'lastname': {"type": str, "regex": name_pattern},
-            'email': {"type": str, "regex": email_pattern},
+            'name': {"type": str, "regex": name_pattern},
+            'description': {"type": str, "regex": description_pattern},
+            'price': {"type": str, "regex": price_pattern},
             'type': {"type": str, "regex": type_pattern}
         }
         for mandatory, specs in mandatories.items():
