@@ -11,11 +11,10 @@ class ArticleVue:
         self._common = Common()
         self._article_controller = article_controller
 
-    def add_article(self, article_type):
+    def add_article(self):
         # Show subscription formular
         data = {}
-        print("Store user Subscription")
-        print(article_type)
+        print("Store article Subscription")
         print()
         data['name'] = self._common.ask_namearticle()
         data['description'] = self._common.ask_description()

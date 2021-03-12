@@ -38,8 +38,6 @@ class AdminVue(MemberVue, ArticleVue):
             "search": "Show member profile",
             "delete": "Delete a member",
             "update": "Update a member",
-            "--------------------------"
-
             "addArticle": "Add store article",
             "listArticle": "List association articles",
             "searchArticle": "Show article informations",
@@ -72,18 +70,17 @@ class AdminVue(MemberVue, ArticleVue):
                     self.show_member(member)
                 elif command == 'help':
                     self.help(commands)
-                elif command == 'add':
-                    article_type = 'unknown'
-                    article = self.add_member(article_type)
+                elif command == 'addArticle':
+                    article = self.add_article()
                     self.show_article(article)
                 elif command == 'listArticle':
                     self.show_articles()
-                elif command == 'search':
+                elif command == 'searchArticle':
                     article = self.search_article()
                     self.show_member(article)
-                elif command == 'delete':
+                elif command == 'deleteArticle':
                     self.delete_article()
-                elif command == 'update':
+                elif command == 'updateArticle':
                     article = self.update_article()
                     self.show_article(article)
                 else:
