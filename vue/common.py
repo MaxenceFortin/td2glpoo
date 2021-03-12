@@ -26,3 +26,12 @@ class Common:
 
     def ask_type(self, default=None):
         return self.ask(key_name="type (seller or customer)", regex="^(customer|seller)$", default=default)
+
+    def ask_namearticle(self, default=None):
+        return self.ask(key_name="name", regex=None, default=default).lower()
+
+    def ask_description(self, default=None):
+        return self.ask(key_name="description", regex=None, default=default)
+
+    def ask_price(self, default=None):
+        return self.ask(key_name="price", regex=None, default=default)

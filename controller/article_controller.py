@@ -64,13 +64,8 @@ class ArticleController:
 
     def _check_profile_data(self, data, update=False):
         name_pattern = re.compile("^[\S-]{2,50}$")
-        type_pattern = re.compile("^(customer|seller)$")
-        email_pattern = re.compile("^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
         mandatories = {
-            'name': {"type": str, "regex": name_pattern},
-            'description': {"type": str, "regex": description_pattern},
-            'price': {"type": str, "regex": price_pattern},
-            'type': {"type": str, "regex": type_pattern}
+            'name': {"type": str, "regex": name_pattern}
         }
         for mandatory, specs in mandatories.items():
             if not update:
